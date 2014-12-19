@@ -1,0 +1,35 @@
+
+<div class="header">
+	<h1>Financial Health</h1>
+	<div class="alert">
+		
+		<div class="alertDetails">
+			<b>Can you pay your bills?</b>
+			<div class="item" data-qbo-bind="text: bankBalances">
+			</div>
+			<div class="item" data-qbo-bind="text: apBalances">
+			</div>
+			<div class="item">
+				Fudge factor
+				<input class="ratio" type="number" data-dojo-attach-event="onchange:ratioChanged" data-qbo-bind="value: ratio">%</input>
+			</div>
+		</div>
+		<div class="happyicon" data-qbo-bind="visible: showHappy">
+			<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTOFvneQ52MyuB232Omp5C4r0VJIfBrdPws0hXWPdy21K3BSn7iCw" width="50" height="50">
+		</div>
+		<div class="sadicon" data-qbo-bind="visible: !showHappy">	
+			<img src="http://www.clker.com/cliparts/X/d/3/i/V/9/black-and-white-sad-face-md.png" width="50" height="50">
+		</div>
+	</div>
+	 <div style="clear: both;"></div>
+
+	<div class="watched">
+		<b>Watched Accounts</b>
+		<div class = "watchAccounts" data-dojo-attach-point="_accountingGridDiv"></div>
+
+	</div>
+	<div class="watchCust">
+		<b>Customize your watched accounts.</b>
+		<input class="accountsInput" type="text" data-dojo-attach-event="onchange:accountsChanged" data-qbo-bind="value: accountsWatched"></input>
+	</div>
+</div>

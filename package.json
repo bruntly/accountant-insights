@@ -1,11 +1,11 @@
 {
-  "name": "starterplugin",
+  "name": "Insights",
   "version": "0.1.0",
-  "description": "starter plugin",
+  "description": "Accountant Insights",
   "readme": "README.md",
   "repository" : {
     "type" : "git",
-    "url" : "http://gitlab.corp.intuit.net/qboplugins/starterplugin.git"
+    "url" : "https://github.com/bruntly/starter-plugin.git"
   },
   "dependencies": {
     "express": "4.9.x",

@@ -5,10 +5,12 @@
   "subscribedEvents": [
     "qbo-transaction"
   ],
-  "sourcePath": "/index.html",
+  
   "accessPoints": [
     {
-      "overrideAppRoute": "customers"
+      "overrideAppRoute": "customers",
+      "sourcePath": "/insightsViewController.js",
+      "isNative" : true
     },
     {
       "attachPoint": "_apSettingsSettingsList",

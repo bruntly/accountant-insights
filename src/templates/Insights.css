@@ -1,0 +1,42 @@
+.header {
+	margin-left: 20px;
+}
+.alert{
+	width: 300px;
+	margin-left: 10px;
+	margin-top: 10px;
+}.item{
+	margin-left: 10px;
+}
+.happyicon {
+	float:right;
+}
+.sadicon {
+	float:right;
+}
+.alertDetails {
+	float: left;
+
+}
+.ratio {
+	width: 30px;
+}
+.watched {
+	margin-left: 10px;
+	margin-top: 20px;
+}
+
+.watchAccounts {
+	width: 500px;
+}
+
+.accountsInput {
+	margin-top: 10px;
+	width: 300px;
+}
+
+.watchCust {
+	margin-top: 20px;
+	margin-left: 10px;
+	width: 400px;
+}
