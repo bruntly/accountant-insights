@@ -8,8 +8,8 @@
   
   "accessPoints": [
     {
-      "overrideAppRoute": "customers",
-      "sourcePath": "/insightsViewController.js",
+      "overrideAppRoute": "homepage",
+      "sourcePath": "/InsightsViewController.js",
       "isNative" : true
     },
     {

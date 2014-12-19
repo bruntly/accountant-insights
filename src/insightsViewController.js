@@ -6,7 +6,7 @@ define([
      "dgrid/OnDemandGrid",  
     "neo/BaseViewController",
     "qbo/services/AccountService",
-    "neo/BaseService",
+    "./InsightsService",
     "./InsightsModel",
     "dojo/text!./templates/Insights.html",
     "dojox/html/entities",
@@ -14,27 +14,25 @@ define([
     "dgrid/Selection",
     "dgrid/selector",
     "xstyle/css!./templates/Insights.css"
-   ], function(declare, when, on, domConstruct, OnDemandGrid, BaseViewController,  AccountService, BaseService, InsightsModel, template, htmlEntities, amount, Selection, selector) {
+   ], function(declare, when, on, domConstruct, OnDemandGrid, BaseViewController,  AccountService, InsightsService, InsightsModel, template, htmlEntities, amount, Selection, selector) {
 
- 	return declare([BaseViewController, BaseService], {
+    return declare([BaseViewController], {
 
- 		templateString: template,
+        templateString: template,
 
-		constructor: function(args) {
+        constructor: function(args) {
             this.model = new InsightsModel();
-            this.accountService = new AccountService();
-
+            this.insightService = new InsightsService();
         },
 
-        loadAllAccounts: function () {
-            var dataURL = this.getUIServiceUrl("lists/account/list");
-            return this.doXHRGet(dataURL);
-        },
-
- 		startup: function () {
+        startup: function () {
             this.inherited(arguments);
-                this.initGrid();
- 			return when(this.loadAllAccounts(), function(response) {
+            this.initGrid();
+            this.initBankApInsight();       
+        },
+
+        initBankApInsight : function() {
+            return when(this.insightService.loadAllAccounts(), function(response) {
                 var bankBalance = 0, apBalance =0;
                 if (response && response.length > 0) {
                     this.model.set("allAccounts", response);
@@ -49,8 +47,7 @@ define([
                         if (account.type ==="Accounts payable (A&#x2F;P)") {
                             apBalance = apBalance + balance;
                             console.log(account.name + " has balance " + account.balance);
-                        }
-                        
+                        }                        
                     }
                     console.log("Bank Balances: " + bankBalance);
                     console.log("AP Balances: " + apBalance);
@@ -59,7 +56,7 @@ define([
                     this.model.set("bankBalance", bankBalance);
                     this.model.set("apBalance", apBalance);
 
-                    var ratio = parseInt(localStorage.getItem("bankAPratio"));
+                    var ratio = parseInt(localStorage.getItem("bankAPratio"), 10);
 
                     if (!ratio) {
                         ratio = 100;
@@ -68,15 +65,12 @@ define([
                     if (this.model.bankBalance * (ratio / 100) > this.model.apBalance) {
                         this.model.set("showHappy", true);
                     }
-
                 }
-
- 			}.bind(this));
-        
- 		},
+            }.bind(this));
+        },
 
         ratioChanged: function(val ) {
-            var ratio = parseInt(val.srcElement.value);
+            var ratio = parseInt(val.srcElement.value, 10);
 
             console.log("ratio changed: " + val.srcElement.value);
             localStorage.setItem("bankAPratio", ratio);
@@ -141,6 +135,6 @@ define([
             }.bind(this));
 
         }
- 		 
- 	});
+         
+    });
  });
